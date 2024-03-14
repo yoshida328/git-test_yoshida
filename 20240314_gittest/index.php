@@ -16,9 +16,18 @@
     session_start(); // セッションの開始
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // POSTされたデータを取得
+        $to = $_POST['to'];
         $name = $_POST["name"];
         $email = $_POST["email"];
         $message = $_POST["message"];
+
+        // フォームからの選択された値に応じて subject を設定
+        if ($to !== 'その他') {
+        $subject = $to;
+        } else {
+        $subject = $_POST['subject'];
+        }
 
         // バリデーション
         if (empty($name) || empty($email) || empty($message)) {
@@ -36,14 +45,15 @@
                 die("Error: " . $e->getMessage());
             }
 
-            $sql = "INSERT INTO comments (name, email, message, created_at) 
-            VALUES (:name, :email, :message, NOW())";
+            $sql = "INSERT INTO comments (name, email, message, subject, created_at) 
+            VALUES (:name, :email, :message, :subject, NOW())";
 
             try {
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':name', $name, PDO::PARAM_STR);
                 $stmt->bindParam(':email', $email, PDO::PARAM_STR);
                 $stmt->bindParam(':message', $message, PDO::PARAM_STR);
+                $stmt->bindParam(':subject', $subject, PDO::PARAM_STR); // 宛先をバインド
 
                 $stmt->execute();
                 echo "データが正常に挿入されました。";
@@ -93,6 +103,19 @@
                     <p>2023年12月よりプログラミング訓練校入校←6月まで予定</p>
                     <p>就職は東京予定</p>
                 </section>
+                <section>
+                    <h2>Profile & Introduction</h2>
+                    <img src="./image/bastet.png" alt="Your Photo" width="200">
+                    <p>
+                        はじめまして、私は藤澤と申します。日々、家庭と仕事をバランスよくこなしながら、充実した生活を送っています。
+
+                        趣味の一つは動画鑑賞です。映画やドラマ、YouTubeなど、様々なジャンルの動画を楽しんでいます。特に、感動的なストーリーや興味深いドキュメンタリーに心惹かれます。また、新しい作品を見つけるために、時には映画館に足を運ぶこともあります。
+
+                        日常生活では、仕事に情熱を注ぎながらも、家族との時間を大切に過ごしています。夫とはお互いの支え合いながら、幸せな家庭を築いています。
+
+                        これからも、自分自身を成長させながら、家族や仲間と共に笑顔あふれる日々を過ごしていきたいと考えています。よろしくお願いします。
+                    </p>
+                </section>
 
 
 
@@ -108,6 +131,13 @@
     <section id="contact">
         <h2 class="headingL">お問い合わせフォーム</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="mailform">
+            <label for="to">宛先：</label>
+            <select id="to" name="to" required>
+                <option value="">宛先を選択してください</option>
+                <option value="吉田さん">吉田さん</option>
+                <option value="藤澤">藤澤</option>
+                <option value="その他">その他</option>
+            </select><br>
             <input id="name" type="text" name="name" placeholder="お名前" required><br>
             <input id="mail" type="email" name="email" placeholder="メールアドレス" required><br>
             <textarea id="message" name="message" placeholder="メッセージ" required></textarea><br>
