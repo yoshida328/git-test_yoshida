@@ -103,9 +103,17 @@
                     <p>2023年12月よりプログラミング訓練校入校←6月まで予定</p>
                     <p>就職は東京予定</p>
                 </section>
-                <section>
-                    <h2>Profile & Introduction</h2>
-                    <img src="./images/bastet.png" alt="My Photo" width="200">
+                
+
+
+
+            </div><!-- プロフィール文章ここまで -->
+        </div>
+    </section><!-- プロフィールここまで -->
+    </section>
+    <section class="profile bg-white">
+                    <h2>自己紹介</h2>
+                    <div class="profile__img"><img src="./images/bastet.png" alt="My Photo" width="400"></div>
                     <p>
                         はじめまして、私は藤澤と申します。日々、家庭と仕事をバランスよくこなしながら、充実した生活を送っています。
 
@@ -115,14 +123,8 @@
 
                         これからも、自分自身を成長させながら、家族や仲間と共に笑顔あふれる日々を過ごしていきたいと考えています。よろしくお願いします。
                     </p>
-                </section>
-
-
-
-            </div><!-- プロフィール文章ここまで -->
-        </div>
-    </section><!-- プロフィールここまで -->
     </section>
+    
 
 
 
