@@ -105,7 +105,7 @@
                 </section>
                 <section>
                     <h2>Profile & Introduction</h2>
-                    <img src="./image/bastet.png" alt="Your Photo" width="200">
+                    <img src="./images/bastet.png" alt="My Photo" width="200">
                     <p>
                         はじめまして、私は藤澤と申します。日々、家庭と仕事をバランスよくこなしながら、充実した生活を送っています。
 
